@@ -1,0 +1,20 @@
+<form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+  <mat-card>
+    <mat-card-title>Pizzeria</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Pedido</mat-label>
+        <input matInput formControlName="orderItems">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Total</mat-label>
+        <input matInput formControlName="total" type="number">
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Enviar pedido</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<app-order-status *ngIf="orderSubmitted"></app-order-status>
