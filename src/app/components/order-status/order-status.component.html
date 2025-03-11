@@ -1,5 +1,5 @@
-<div class="order-status">
-    <h2>{{ statusMessage }}</h2>
-    <img [src]="gifUrl" alt="Order status" class="status-gif">
-  </div>
-  
+<div class="status-container" [ngStyle]="{'background-image': 'url(' + backgroundUrl + ')'}">
+  <p class="status-message">{{ statusMessage }}</p>
+  <img class="status-gif" [src]="gifUrl" alt="Estado del pedido">
+  <button *ngIf="delivered" (click)="resetStatus()">Reiniciar Pedido</button>
+</div>

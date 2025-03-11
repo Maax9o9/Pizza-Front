@@ -13,8 +13,10 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   @Input() orderId!: number;
   statusMessage: string = 'Esperando pedido...';
   gifUrl: string = 'repartidor.gif'; 
+  backgroundUrl: string = 'Dominos.jpeg'; // Define la URL de la imagen de fondo
   private pollingInterval: any;
   private apiUrl = 'http://localhost:7070/api/delivery';
+  public delivered: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -33,13 +35,23 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   }
 
   checkOrderStatus() {
-    this.http.get<{ status: string }>(this.apiUrl).subscribe(response => {
-      if (response.status === 'delivered') {
-        this.statusMessage = '¡Entregada!';
-        this.gifUrl = 'entregado.gif'; 
-        clearInterval(this.pollingInterval);
-      }
-    });
+    if (!this.delivered) {
+      this.http.get<{ status: string }>(this.apiUrl).subscribe(response => {
+        if (response.status === 'delivered') {
+          this.statusMessage = '¡Entregada!';
+          this.gifUrl = 'entregado.gif'; 
+          clearInterval(this.pollingInterval);
+          this.delivered = true;
+        }
+      });
+    }
+  }
+
+  resetStatus() {
+    this.statusMessage = 'Esperando pedido...';
+    this.gifUrl = 'repartidor.gif';
+    this.delivered = false;
+    this.startPolling();
   }
 
   startDelivery() {
