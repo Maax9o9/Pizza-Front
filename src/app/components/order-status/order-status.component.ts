@@ -15,7 +15,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   gifUrl: string = 'repartidor.gif'; 
   private pollingInterval: any;
   private pollingTimeout: any; 
-  private apiUrl = 'http://localhost:7070/api/delivery'; 
+  private apiUrl = 'http://44.198.101.165:7070/api/delivery'; 
   public delivered: boolean = false;
   private maxPollingTime = 10000;  
   private pollingStartTime: number = 0; 

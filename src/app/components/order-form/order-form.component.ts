@@ -25,7 +25,7 @@ export class OrderFormComponent {
   orderForm: FormGroup;
   static orderIdCounter: number = 1; 
   orderId: number;
-  apiUrl: string = 'http://localhost:8080/order';
+  apiUrl: string = 'http://35.171.234.157:8080/order';
   orderSubmitted = false;
   orderStatusUpdated = false;
 
